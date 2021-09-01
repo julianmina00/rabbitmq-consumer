@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { HealthModule } from './health/health.module';
 import { SharedModule } from './shared/shared.module';
+import { ConsumerModule } from './consumer/consumer.module';
 
 @Module({
   imports: [
@@ -12,7 +13,8 @@ import { SharedModule } from './shared/shared.module';
       isGlobal: true,
       load: [configuration]
     }),
-    SharedModule
+    SharedModule,
+    ConsumerModule
   ],
   controllers: [],
   providers: []

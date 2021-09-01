@@ -7,6 +7,7 @@ import { AppModule } from './app.module';
 import { swaggerConfig } from './config/swagger';
 import { corsOptions } from './config/cors';
 import { LoggerService } from './shared/services/logger.service';
+import { MicroserviceOptions, RmqOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,6 +22,19 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig());
   SwaggerModule.setup('api', app, document);
   await app.listen(port);
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.RMQ,
+    options: {
+      urls: [configService.get<string>('rabbitConnectionUrl')],
+      queue: configService.get<string>('rabbitQueueName'),
+      queueOptions: {
+        durable: true
+      }
+    }
+  } as RmqOptions);
+  app.startAllMicroservicesAsync().catch((ex) => {
+    logger.error(`Error starting all microservices ${ex}`);
+  });
   logger.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

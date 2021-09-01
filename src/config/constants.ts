@@ -1,6 +1,11 @@
 export const App = {
-  Port: 3000,
+  Port: 3031,
   ServiceName: 'rabbitmq-consumer'
+};
+
+export const RabbitMQ = {
+  ConnectionUrl: 'amqp://localhost:5672',
+  QueueName: 'test-queue'
 };
 
 export enum Environments {

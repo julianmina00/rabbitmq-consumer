@@ -56,9 +56,9 @@ The following table lists the configurable parameters of this chart:
 | `deployment.name` | Name of the deployment | `rabbitmq-consumer` |
 | `deployment.replicas` | Number of replicas to deploy initially | `1` |
 | `deployment.minAvailable` | Minumun number of available replicas for the pod disruption budget | `1` |
-| `deployment.servicePort.number` | Port to access the service | `3000` |
+| `deployment.servicePort.number` | Port to access the service | `3031` |
 | `deployment.servicePort.name` | name givent to the service port | `http` |
-| `deployment.containerPort.number` | Port exposed by the container | `3000` |
+| `deployment.containerPort.number` | Port exposed by the container | `3031` |
 | `deployment.containerPort.protocol` | Protocol of the container port | `TCP` |
 | `deployment.readinessProbe.endpoint` | Endpoint to be checked by the readiness probe | `/api/health` |
 | `deployment.readinessProbe.successThreshold` | Successfull threshold for the readiness probe | `1` |
@@ -73,4 +73,6 @@ The following table lists the configurable parameters of this chart:
 The values file may be found [here](./values.yaml)
 
 ## Required Parameters
-Since all values are provided in the default [values file](./values.yaml), no parameters are mandatory. Even so, it is necessay to make sure that the default values were properly set.
+These are the required parameters:
+- container.image.registry
+- container.image.pullSecrets
