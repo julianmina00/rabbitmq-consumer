@@ -7,7 +7,11 @@ import { AppModule } from './app.module';
 import { swaggerConfig } from './config/swagger';
 import { corsOptions } from './config/cors';
 import { LoggerService } from './shared/services/logger.service';
-import { MicroserviceOptions, RmqOptions, Transport } from '@nestjs/microservices';
+import {
+  MicroserviceOptions,
+  RmqOptions,
+  Transport
+} from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
