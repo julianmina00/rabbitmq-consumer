@@ -1,13 +1,13 @@
 import { Controller } from '@nestjs/common';
-import { EventPattern, Payload } from '@nestjs/microservices';
+import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 import { ConsumerService } from './consumer.service';
 
 @Controller()
 export class ConsumerController {
   constructor(private readonly consumerService: ConsumerService) {}
 
-  @EventPattern('intro')
-  getHealth(@Payload() data: any) {
-    return this.consumerService.consume('intro', data);
+  @EventPattern('message')
+  getMessage(@Ctx() context: RmqContext, @Payload() data: any) {
+    return this.consumerService.consume(context.getPattern(), data);
   }
 }

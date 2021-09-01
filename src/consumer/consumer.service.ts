@@ -8,6 +8,6 @@ export class ConsumerService {
   }
 
   consume(type: string, message: any): void {
-    this.logger.info(`Receiving message [${type}: ${JSON.stringify(message)}`);
+    this.logger.info(`Receiving [${type}: ${JSON.stringify(message)}]`);
   }
 }
